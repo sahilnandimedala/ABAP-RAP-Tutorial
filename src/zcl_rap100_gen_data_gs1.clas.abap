@@ -10,7 +10,10 @@ CLASS zcl_rap100_gen_data_gs1 DEFINITION
   PRIVATE SECTION.
 ENDCLASS.
 
-CLASS zcl_rap100_gen_data_gs1 IMPLEMENTATION.
+
+
+CLASS ZCL_RAP100_GEN_DATA_GS1 IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
     DATA:
@@ -51,10 +54,9 @@ CLASS zcl_rap100_gen_data_gs1 IMPLEMENTATION.
             travel~lastchangedby    AS last_changed_by,
             travel~lastchangedat    AS last_changed_at,
             travel~lastchangedat    AS local_last_changed_at
-            ORDER BY travel_id UP TO 10 ROWS
+            ORDER BY travel_id UP TO 100 ROWS
       ).
     COMMIT WORK.
     out->write( |[RAP100] Demo data generated for table ZRAP100_ATRAV{ group_id }. | ).
   ENDMETHOD.
 ENDCLASS.
-

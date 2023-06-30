@@ -35,7 +35,9 @@ ENDCLASS.
 
 
 
-CLASS zrap100_tc_travel_eml_gs1 IMPLEMENTATION.
+CLASS ZRAP100_TC_TRAVEL_EML_GS1 IMPLEMENTATION.
+
+
   METHOD class_setup.
     " create the test doubles for the underlying CDS entities
     cds_test_environment = cl_cds_test_environment=>create_for_multiple_cds(
@@ -66,6 +68,7 @@ CLASS zrap100_tc_travel_eml_gs1 IMPLEMENTATION.
     cds_test_environment->destroy(  ).
     sql_test_environment->destroy(  ).
   ENDMETHOD.
+
 
   METHOD create_with_action.
     " create a complete composition: Travel (root)
@@ -145,6 +148,4 @@ CLASS zrap100_tc_travel_eml_gs1 IMPLEMENTATION.
     " clean up any involved entity
     ROLLBACK ENTITIES.
   ENDMETHOD.
-
-
 ENDCLASS.

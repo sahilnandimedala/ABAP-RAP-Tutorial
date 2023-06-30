@@ -9,12 +9,34 @@
 }
 annotate view ZRAP100_C_TRAVELTP_GS1 with
 {
-  @UI.facet: [ {
-    id: 'idIdentification',
-    type: #IDENTIFICATION_REFERENCE,
-    label: 'Travel',
-    position: 10
-  } ]
+
+  // Overview Page Section
+  @UI.facet: [
+      {
+        id: 'idIdentification',
+        type: #IDENTIFICATION_REFERENCE,
+        label: 'Travel',
+        position: 10
+      },
+      // Section
+      {
+        position: 20,
+        purpose: #STANDARD,
+        type: #COLLECTION,
+        label: 'Customer',
+        id: 'customerFacetSection'
+      },
+      // Fieldgroup Reference
+      {
+        id: 'customerData',
+        parentId: 'customerFacetSection',
+        label: 'Customer Details',
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'customerData'
+      }
+  ]
+
+
   @UI.lineItem: [ {
     position: 10 ,
     importance: #MEDIUM,
@@ -40,6 +62,8 @@ annotate view ZRAP100_C_TRAVELTP_GS1 with
   AgencyID;
 
   @UI.lineItem: [ {
+  //    type: #AS_CONTACT,
+  //    value: '_Customer',
     position: 30 ,
     importance: #MEDIUM,
     label: ''
@@ -50,6 +74,9 @@ annotate view ZRAP100_C_TRAVELTP_GS1 with
   } ]
   @UI.selectionField: [{position: 30 }]
   CustomerID;
+  
+  @UI.fieldGroup: [{ qualifier: 'customerData' }]
+  CustomerName;
 
   @UI.lineItem: [ {
     position: 40 ,
@@ -123,13 +150,13 @@ annotate view ZRAP100_C_TRAVELTP_GS1 with
   Description;
 
   @UI: {
-  lineItem:       [ { position: 100, importance: #HIGH }                          
-                    ,{ type: #FOR_ACTION, dataAction: 'copyTravel', label: 'Copy Travel' } 
+  lineItem:       [ { position: 100, importance: #HIGH }
+                    ,{ type: #FOR_ACTION, dataAction: 'copyTravel', label: 'Copy Travel' }
                     ,{ type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' }
                     ,{ type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }
        ],
-  identification: [ { position: 100 }                          
-                   ,{ type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount' } 
+  identification: [ { position: 100 }
+                   ,{ type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount' }
                    ,{ type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' }
                    ,{ type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }
        ],
@@ -150,4 +177,35 @@ annotate view ZRAP100_C_TRAVELTP_GS1 with
 
   @UI.hidden: true
   LastChangedAt;
+
+
+  // Customer Data
+  @UI.fieldGroup: [
+  {
+    label: 'Customer ID',
+    qualifier: 'customerData',
+    value: '_Customer.CustomerID',
+    position: 10
+  },
+  {
+    label: 'First Name',
+    qualifier: 'customerData',
+    value: '_Customer.FirstName',
+    position: 20
+  },
+  {
+    label: 'Last Name',
+    qualifier: 'customerData',
+    value: '_Customer.LastName',
+    position: 30
+  },
+  {
+    label: 'Phone',
+    qualifier: 'customerData',
+    value: '_Customer.PhoneNumber',
+    position: 40
+  }
+  ]
+  _Customer;
+
 }

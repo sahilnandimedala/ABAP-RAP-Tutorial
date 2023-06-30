@@ -44,6 +44,8 @@ define root view entity ZRAP100_C_TRAVELTP_GS1
       Attachment,
       MimeType,
       FileName,
-      LastChangedAt
+      LastChangedAt,
+      
+      _Customer
 
 }
